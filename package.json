@@ -1,0 +1,25 @@
+{
+  "name": "weather-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss -i ./input.css -o ./assets/css/main.css",
+    "watch": "tailwindcss -i ./input.css -o ./assets/css/main.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ss12932/weather-dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ss12932/weather-dashboard/issues"
+  },
+  "homepage": "https://github.com/ss12932/weather-dashboard#readme",
+  "dependencies": {
+    "tailwindcss": "^3.0.24"
+  }
+}
