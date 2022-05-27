@@ -20,7 +20,7 @@ SO THAT I can plan a trip accordingly
 
 ## Technologies
 
-HTML, TailwindCSS, JS, Jquery, Moment.js
+HTML, TailwindCSS, JS, JQuery, Moment.js
 
 ## Package
 
