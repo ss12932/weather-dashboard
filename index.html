@@ -10,7 +10,7 @@
   <body class="h-screen">
     <header class="bg-rich-black-fogra-29 text-white py-6">
       <h1 class="uppercase tracking-wider text-center font-bold text-xl">
-        Weather Dashboard
+        Sinh's Weather Dashboard
       </h1>
     </header>
     <main class="main flex flex-col md:flex-row">
@@ -32,7 +32,7 @@
               <button
                 type="submit"
                 id="submit-btn"
-                class="w-full p-2 bg-blue-sapphire text-white my-2"
+                class="w-full p-2 bg-viridian-green text-white my-2 hover:bg-blue-sapphire transition-all"
               >
                 Search
               </button>
@@ -49,22 +49,35 @@
           </div>
           <!-- recent searches ul list -->
           <ul class="">
-            <li class="border p-3 flex justify-between">
-              <span>London</span><span class="font-bold text-md">&times</span>
+            <li
+              class="border p-3 flex justify-between hover:bg-black hover:text-white transition-all"
+            >
+              <span>London</span
+              ><span class="font-bold text-md cursor-pointer">&times</span>
             </li>
-            <li class="border p-3 flex justify-between">
-              <span>Bristol</span><span class="font-bold text-md">&times</span>
+            <li
+              class="border p-3 flex justify-between hover:bg-black hover:text-white transition-all"
+            >
+              <span>Bristol</span
+              ><span class="font-bold text-md cursor-pointer">&times</span>
             </li>
-            <li class="border p-3 flex justify-between">
+            <li
+              class="border p-3 flex justify-between hover:bg-black hover:text-white transition-all"
+            >
               <span>Manchester</span
-              ><span class="font-bold text-md">&times</span>
+              ><span class="font-bold text-md cursor-pointer">&times</span>
             </li>
-            <li class="border p-3 flex justify-between">
+            <li
+              class="border p-3 flex justify-between hover:bg-black hover:text-white transition-all"
+            >
               <span>Birmingham</span
-              ><span class="font-bold text-md">&times</span>
+              ><span class="font-bold text-md cursor-pointer">&times</span>
             </li>
-            <li class="border p-3 flex justify-between">
-              <span>Brighton</span><span class="font-bold text-md">&times</span>
+            <li
+              class="border p-3 flex justify-between hover:bg-black hover:text-white transition-all"
+            >
+              <span>Brighton</span
+              ><span class="font-bold text-md cursor-pointer">&times</span>
             </li>
           </ul>
         </div>
@@ -90,7 +103,7 @@
             </div>
           </div>
           <!-- metric div -->
-          <div class="mx-auto grid grid-cols-3 p-4">
+          <div class="mx-auto grid grid-cols-3 p-4 m-2">
             <div class="bg-rich-black-fogra-29 text-white font-semibold">
               <div class="border p-1">Temperature</div>
               <div class="border p-1">Humidity</div>
