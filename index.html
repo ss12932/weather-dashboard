@@ -15,11 +15,48 @@
     </header>
     <main class="h-full main flex flex-col md:flex-row">
       <!-- Search Form + recent Searches Container -->
-      <div class="w-full border md:w-1/4">
+      <div class="w-full border md:w-1/4 px-2">
         <!-- Search Form -->
-        <div>Search Form</div>
+        <div>
+          <h2 class="font-bold text-2xl p-2">Search</h2>
+          <form id="search-form">
+            <div>
+              <input
+                type="text"
+                class="form-control w-full p-2 border"
+                id="search-input"
+                placeholder="Enter Your City"
+              />
+            </div>
+            <div>
+              <button type="submit" id="submit-btn"></button>
+            </div>
+          </form>
+        </div>
         <!-- Recent Searches -->
-        <div>Recent Searches</div>
+        <div class="recent-searches-container">
+          <h2 class="font-bold text-2xl p-2">Recent Searches</h2>
+          <div class="p-3 bg-gamboge">You have no recent searches!</div>
+          <ul class="">
+            <li class="border p-3 flex justify-between">
+              <span>London</span><span class="font-bold text-md">&times</span>
+            </li>
+            <li class="border p-3 flex justify-between">
+              <span>Bristol</span><span class="font-bold text-md">&times</span>
+            </li>
+            <li class="border p-3 flex justify-between">
+              <span>Manchester</span
+              ><span class="font-bold text-md">&times</span>
+            </li>
+            <li class="border p-3 flex justify-between">
+              <span>Birmingham</span
+              ><span class="font-bold text-md">&times</span>
+            </li>
+            <li class="border p-3 flex justify-between">
+              <span>Brighton</span><span class="font-bold text-md">&times</span>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <!-- Weather info container -->
