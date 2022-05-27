@@ -502,6 +502,30 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
+
+.col-span-9 {
+  grid-column: span 9 / span 9;
+}
+
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+
+.row-span-3 {
+  grid-row: span 3 / span 3;
+}
+
+.m-2 {
+  margin: 0.5rem;
+}
+
+.m-4 {
+  margin: 1rem;
+}
+
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -543,6 +567,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 100%;
 }
 
+.h-\[80vh\] {
+  height: 80vh;
+}
+
+.h-\[90vh\] {
+  height: 90vh;
+}
+
+.h-\[92vh\] {
+  height: 92vh;
+}
+
 .w-1\/3 {
   width: 33.333333%;
 }
@@ -579,12 +615,24 @@ Ensure the default browser behavior of the `hidden` attribute.
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .flex-col {
   flex-direction: column;
 }
 
 .flex-wrap {
   flex-wrap: wrap;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .justify-between {
@@ -597,6 +645,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .gap-2 {
   gap: 0.5rem;
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.gap-5 {
+  gap: 1.25rem;
+}
+
+.gap-8 {
+  gap: 2rem;
 }
 
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
@@ -763,6 +823,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .font-bold {
   font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
 }
 
 .uppercase {
