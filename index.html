@@ -10,7 +10,8 @@
   <body class="h-screen">
     <header class="bg-rich-black-fogra-29 text-white py-6">
       <h1 class="uppercase tracking-wider text-center font-bold text-xl">
-        Sinh's Weather Dashboard
+        Sinh's Weather
+        <span class="bg-alloy-orange p-2 rounded">Dashboard</span>
       </h1>
     </header>
     <main class="main flex flex-col md:flex-row">
@@ -101,8 +102,8 @@
       <!-- Weather info container -->
       <div class="w-full border md:w-3/4">
         <!-- current weather container -->
-        <div>
-          <div class="flex justify-center space-x-6 my-4">
+        <div class="mx-20">
+          <div class="flex justify-center space-x-6 my-4 flex-col md:flex-row">
             <div>
               <h2 class="text-center text-4xl font-bold my-2">Coventry</h2>
               <h3 class="text-center text-2xl semibold my-2">
@@ -118,18 +119,38 @@
             </div>
           </div>
           <!-- metric div -->
-          <div class="mx-auto grid grid-cols-3 p-4 m-2">
-            <div class="bg-rich-black-fogra-29 text-white font-semibold">
-              <div class="border p-1">Temperature</div>
-              <div class="border p-1">Humidity</div>
-              <div class="border p-1">Wind Speed</div>
-              <div class="border p-1">UV Index</div>
+          <div class="mx-auto p-4 m-2">
+            <div class="flex flex-col md:flex-row">
+              <div
+                class="w-full md:w-1/3 border p-1 bg-rich-black-fogra-29 text-white font-semibold"
+              >
+                Temperature
+              </div>
+              <div class="w-full md:w-2/3 border p-1">17.15C</div>
             </div>
-            <div class="col-span-2">
-              <div class="border p-1">17.15C</div>
-              <div class="border p-1">52%</div>
-              <div class="border p-1">3.6MPH</div>
-              <div class="border p-1">3</div>
+            <div class="flex flex-col md:flex-row">
+              <div
+                class="w-full md:w-1/3 border p-1 bg-rich-black-fogra-29 text-white font-semibold"
+              >
+                Humidity
+              </div>
+              <div class="w-full md:w-2/3 border p-1">17.15C</div>
+            </div>
+            <div class="flex flex-col md:flex-row">
+              <div
+                class="w-full md:w-1/3 border p-1 bg-rich-black-fogra-29 text-white font-semibold"
+              >
+                Windspeed
+              </div>
+              <div class="w-full md:w-2/3 border p-1">17.15C</div>
+            </div>
+            <div class="flex flex-col md:flex-row">
+              <div
+                class="w-full md:w-1/3 border p-1 bg-rich-black-fogra-29 text-white font-semibold"
+              >
+                UV Index
+              </div>
+              <div class="w-full md:w-2/3 border p-1">17.15C</div>
             </div>
           </div>
         </div>
