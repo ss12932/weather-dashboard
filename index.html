@@ -7,13 +7,24 @@
     <link rel="stylesheet" href="./assets/css/main.css" />
     <title>Document</title>
   </head>
-  <body>
+  <body class="h-screen">
     <header class="bg-rich-black-fogra-29 text-white py-6">
       <h1 class="uppercase tracking-wider text-center font-bold text-xl">
         Weather Dashboard
       </h1>
     </header>
-    <main class="main"></main>
+    <main class="h-full main flex flex-col md:flex-row">
+      <!-- Search Form + recent Searches Container -->
+      <div class="w-full border md:w-1/4">
+        <!-- Search Form -->
+        <div>Search Form</div>
+        <!-- Recent Searches -->
+        <div>Recent Searches</div>
+      </div>
+
+      <!-- Weather info container -->
+      <div class="w-full border md:w-3/4">weather info</div>
+    </main>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
       integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
