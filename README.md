@@ -6,6 +6,8 @@ This Week's assignment is to build a weather dashboard that will run in the brow
 
 ## Deployed Link
 
+https://ss12932.github.io/weather-dashboard/
+
 ## Github Repository Link
 
 ## Application Screenshot
