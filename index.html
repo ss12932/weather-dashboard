@@ -8,11 +8,25 @@
     <title>Document</title>
   </head>
   <body class="h-screen">
-    <header class="bg-rich-black-fogra-29 text-white py-6">
-      <h1 class="uppercase tracking-wider text-center font-bold text-xl">
+    <header
+      class="bg-rich-black-fogra-29 text-white py-6 flex justify-between px-6"
+    >
+      <h1 class="uppercase tracking-wider font-bold text-xl">
         Sinh's Weather
         <span class="bg-alloy-orange p-2 rounded">Dashboard</span>
       </h1>
+      <nav class="space-x-6">
+        <a
+          class="font-bold tracking-wider uppercase p-2 rounded hover:bg-alloy-orange transition-all"
+          href="./index.html"
+          >Home</a
+        >
+        <a
+          class="font-bold tracking-wider uppercase p-2 rounded hover:bg-alloy-orange transition-all"
+          href="./charts.html"
+          >Charts</a
+        >
+      </nav>
     </header>
     <main class="main flex flex-col md:flex-row">
       <!-- Search Form + recent Searches Container -->
