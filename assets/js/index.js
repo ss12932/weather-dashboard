@@ -30,7 +30,19 @@ const renderRecentSearches = () => {
   }
 };
 
+const handleRecentSearchClick = (e) => {
+  const target = $(e.target);
+  //restrict clicks only from lis
+  if (target.is("li")) {
+    // console.log("search");
+    //get data city attribute
+    const cityName = target.data("city");
+    console.log(cityName);
+  }
+};
+
 const initialLoad = () => {
   renderRecentSearches();
 };
+$recentSearchesCtr.on("click", handleRecentSearchClick);
 $(document).ready(initialLoad);
