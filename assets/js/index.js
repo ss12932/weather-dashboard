@@ -1,9 +1,11 @@
 "use strict";
+
 //Global Declarations
 const recentSearchesCtr = $("#recent-searches-ctr");
 const searchForm = $("#search-form");
 const weatherInfoCtr = $("#weather-info-ctr");
 
+// ## Start of Utility Functions ##
 const retrieveFromLS = (key, value) => {
   // get from LS using key name and parse it.
   const dataFromLS = JSON.parse(localStorage.getItem(key));
@@ -20,11 +22,32 @@ const writeToLS = (key, value) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
-const renderCurrentData = () => {
+const constructUrl = (baseUrl, params) => {
+  const queryParams = new URLSearchParams(params).toString();
+  return queryParams ? `${baseUrl}?${queryParams}` : baseUrl;
+};
+
+const fetchData = async (url, options = {}) => {
+  try {
+    const response = await fetch(url, options);
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      throw new Error("Failed to fetch data");
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+// ## End of Utility Functions ##
+
+const renderCurrentData = (data) => {
   const currentDayCard = `<div>
   <div class="flex justify-center space-x-6 my-4 flex-col md:flex-row">
     <div>
-      <h2 class="text-center text-4xl font-bold my-2">Coventry</h2>
+      <h2 class="text-center text-4xl font-bold my-2">Birmingham</h2>
       <h3 class="text-center text-2xl semibold my-2">
         Friday 27th May 2022 12:56:22
       </h3>
@@ -369,6 +392,50 @@ const renderRecentSearches = () => {
   }
 };
 
+const fetchWeatherData = async (cityName) => {
+  // fetch data from api
+
+  //url
+  const currentDataUrl = constructUrl(
+    "https://api.openweathermap.org/data/2.5/weather",
+    {
+      q: cityName,
+      appid: "8109f605d79877f7488a194794a29013",
+    }
+  );
+
+  const currentData = await fetchData(currentDataUrl);
+
+  console.log(currentData);
+
+  //get lat lon and city name
+  const {
+    coord: { lat, lon },
+    name: CityName,
+  } = currentData;
+  // console.log(lat, lon, displayCityName);
+
+  // forecast url
+  const forecastDataUrl = constructUrl(
+    "https://api.openweathermap.org/data/2.5/onecall",
+    {
+      lat: lat,
+      lon: lon,
+      exclude: "minutely,hourly",
+      units: "metric",
+      appid: "8109f605d79877f7488a194794a29013",
+    }
+  );
+
+  const forecastData = await fetchData(forecastDataUrl);
+  console.log(forecastData);
+
+  return {
+    cityName,
+    weatherData: forecastData,
+  };
+};
+
 const handleRecentSearchClick = (e) => {
   const target = $(e.target);
   //restrict clicks only from lis
@@ -380,7 +447,7 @@ const handleRecentSearchClick = (e) => {
   }
 };
 
-const handleFormSubmit = (e) => {
+const handleFormSubmit = async (e) => {
   e.preventDefault();
   // console.log("submit");
 
@@ -389,14 +456,13 @@ const handleFormSubmit = (e) => {
 
   //validate
   if (cityName) {
-    console.log(cityName);
-
-    // fetch data from api
-
+    // console.log(cityName);
+    //fetch weather data
+    const { current, daily } = await fetchWeatherData(cityName);
     //render current data
-    renderCurrentData();
+    renderCurrentData(current);
     //render forecast 5 day data
-    renderForecastData();
+    renderForecastData(daily);
     //get recentSearches from local storage
     const recentSearches = retrieveFromLS("recentSearches", []);
 
