@@ -18,6 +18,7 @@ const renderRecentSearches = () => {
 
   // get From Local Storage
   const recentSearches = retrieveFromLS("recentSearches", []);
+  // const recentSearches = ["London", "Bristol", "Leeds"];
 
   // if empty show alert
   if (!recentSearches.length) {
@@ -27,6 +28,22 @@ const renderRecentSearches = () => {
     $recentSearchesCtr.append(alert);
   } else {
     //else render recent searches list
+    let ul = `<ul>`;
+    const recentCities = $.each(recentSearches, (_, city) => {
+      ul += `<li
+      class="border p-3 flex justify-between cursor-pointer hover:bg-black hover:text-white hover:transition"
+      data-city="${city}"
+    >
+      <span>${city}</span
+      ><span
+        class="font-bold text-md cursor-pointer hover:text-rust hover:scale-150"
+        >&times</span
+      >
+    </li>`;
+    });
+    ul += `</ul>`;
+    //append to parent
+    $recentSearchesCtr.append(ul);
   }
 };
 
