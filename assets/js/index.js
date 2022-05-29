@@ -1,6 +1,7 @@
 "use strict";
 //Global Declarations
-const $recentSearchesCtr = $("#recent-searches-ctr");
+const recentSearchesCtr = $("#recent-searches-ctr");
+const searchForm = $("#search-form");
 
 const retrieveFromLS = (key, value) => {
   // get from LS using key name and parse it.
@@ -11,6 +12,11 @@ const retrieveFromLS = (key, value) => {
   } else {
     return value;
   }
+};
+
+const writeToLS = (key, value) => {
+  // set stringified value to LS for key name
+  localStorage.setItem(key, JSON.stringify(value));
 };
 
 const renderRecentSearches = () => {
@@ -25,7 +31,7 @@ const renderRecentSearches = () => {
     const alert = `<div class="p-3 bg-rufous text-white">
   You have no recent searches!
 </div>`;
-    $recentSearchesCtr.append(alert);
+    recentSearchesCtr.append(alert);
   } else {
     //else render recent searches list
     let ul = `<ul>`;
@@ -43,7 +49,7 @@ const renderRecentSearches = () => {
     });
     ul += `</ul>`;
     //append to parent
-    $recentSearchesCtr.append(ul);
+    recentSearchesCtr.append(ul);
   }
 };
 
@@ -58,8 +64,36 @@ const handleRecentSearchClick = (e) => {
   }
 };
 
+const handleFormSubmit = (e) => {
+  e.preventDefault();
+  // console.log("submit");
+
+  //get form input value
+  const cityName = $("#search-input").val();
+
+  //validate
+  if (cityName) {
+    console.log(cityName);
+
+    //get recentSearches from local storage
+    const recentSearches = retrieveFromLS("recentSearches", []);
+
+    //push city name to array
+    recentSearches.push(cityName);
+
+    //write recent searches to LS
+    writeToLS("recentSearches", recentSearches);
+
+    //remove previous items
+    recentSearchesCtr.children().last().remove();
+    //re render recent searches
+    renderRecentSearches();
+  }
+};
+
 const initialLoad = () => {
   renderRecentSearches();
 };
-$recentSearchesCtr.on("click", handleRecentSearchClick);
+recentSearchesCtr.on("click", handleRecentSearchClick);
+searchForm.on("submit", handleFormSubmit);
 $(document).ready(initialLoad);
