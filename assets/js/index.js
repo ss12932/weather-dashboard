@@ -240,16 +240,31 @@ const renderRecentSearches = () => {
   }
 };
 
-const renderWeatherInfo = async (cityName) => {
-  //fetch weather data
-  const weatherData = await fetchWeatherData(cityName);
-
-  // empty weather info container
+const renderErrorAlert = () => {
+  //empty container before rendering alert
   weatherInfoCtr.empty();
-  //render current data
-  renderCurrentData(weatherData);
-  //render forecast 5 day data
-  renderForecastData(weatherData);
+  const alert = `<div class="p-3 bg-rufous text-white">
+  Something went wrong!! Please try again :)
+</div>`;
+  weatherInfoCtr.append(alert);
+};
+
+const renderWeatherInfo = async (cityName) => {
+  try {
+    //fetch weather data
+    const weatherData = await fetchWeatherData(cityName);
+
+    // empty weather info container
+    weatherInfoCtr.empty();
+    //render current data
+    renderCurrentData(weatherData);
+    //render forecast 5 day data
+    renderForecastData(weatherData);
+    return true;
+  } catch (err) {
+    renderErrorAlert();
+    return false;
+  }
 };
 
 const fetchWeatherData = async (cityName) => {
@@ -304,6 +319,8 @@ const handleRecentSearchClick = (e) => {
     //get data city attribute
     const cityName = target.data("city");
     console.log(cityName);
+
+    renderWeatherInfo(cityName);
   }
 };
 
@@ -319,20 +336,22 @@ const handleFormSubmit = async (e) => {
     // console.log(cityName);
 
     //render weather cards
-    await renderWeatherInfo(cityName);
+    const renderStatus = await renderWeatherInfo(cityName);
     //get recentSearches from local storage
     const recentSearches = retrieveFromLS("recentSearches", []);
 
-    //push city name to array
-    recentSearches.push(cityName);
+    if (!recentSearches.includes(cityName) && renderStatus) {
+      //push city name to array
+      recentSearches.push(cityName);
 
-    //write recent searches to LS
-    writeToLS("recentSearches", recentSearches);
+      //write recent searches to LS
+      writeToLS("recentSearches", recentSearches);
 
-    //remove previous items
-    recentSearchesCtr.children().last().remove();
-    //re render recent searches
-    renderRecentSearches();
+      //remove previous items
+      recentSearchesCtr.children().last().remove();
+      //re render recent searches
+      renderRecentSearches();
+    }
   }
 };
 
