@@ -9,13 +9,15 @@
   </head>
   <body class="h-screen flex flex-col">
     <header
-      class="bg-rich-black-fogra-29 text-white py-6 flex justify-between px-6"
+      class="bg-rich-black-fogra-29 text-white py-6 flex items-center md:justify-between px-6 flex-col md:flex-row space-y-6 md:space-y-0"
     >
-      <h1 class="uppercase tracking-wider font-bold text-xl">
-        Sinh's Weather
+      <h1
+        class="uppercase tracking-wider font-bold text-xl flex flex-col sm:flex-row sm:justify-center items-center space-y-2 sm:space-x-2 sm:space-y-0"
+      >
+        <span>Sinh's Weather</span>
         <span class="bg-alloy-orange p-2 rounded">Dashboard</span>
       </h1>
-      <nav class="space-x-6">
+      <nav class="flex flex-col items-center sm:flex-row md:space-x-6">
         <a
           class="font-bold tracking-wider uppercase p-2 rounded hover:bg-alloy-orange"
           href="./index.html"
