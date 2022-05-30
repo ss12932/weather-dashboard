@@ -240,6 +240,18 @@ const renderRecentSearches = () => {
   }
 };
 
+const renderWeatherInfo = async (cityName) => {
+  //fetch weather data
+  const weatherData = await fetchWeatherData(cityName);
+
+  // empty weather info container
+  weatherInfoCtr.empty();
+  //render current data
+  renderCurrentData(weatherData);
+  //render forecast 5 day data
+  renderForecastData(weatherData);
+};
+
 const fetchWeatherData = async (cityName) => {
   // fetch data from api
 
@@ -305,12 +317,9 @@ const handleFormSubmit = async (e) => {
   //validate
   if (cityName) {
     // console.log(cityName);
-    //fetch weather data
-    const weatherData = await fetchWeatherData(cityName);
-    //render current data
-    renderCurrentData(weatherData);
-    //render forecast 5 day data
-    renderForecastData(weatherData);
+
+    //render weather cards
+    await renderWeatherInfo(cityName);
     //get recentSearches from local storage
     const recentSearches = retrieveFromLS("recentSearches", []);
 

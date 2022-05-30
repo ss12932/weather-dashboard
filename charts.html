@@ -17,12 +17,12 @@
       </h1>
       <nav class="space-x-6">
         <a
-          class="font-bold tracking-wider uppercase p-2 rounded hover:bg-alloy-orange transform"
+          class="font-bold tracking-wider uppercase p-2 rounded hover:bg-alloy-orange"
           href="./index.html"
           >Home</a
         >
         <a
-          class="font-bold tracking-wider uppercase p-2 rounded hover:bg-alloy-orange tranasform"
+          class="font-bold tracking-wider uppercase p-2 rounded hover:bg-alloy-orange"
           href="./charts.html"
           >Charts</a
         >
@@ -47,7 +47,7 @@
               <button
                 type="submit"
                 id="submit-btn"
-                class="w-full p-2 bg-viridian-green text-white my-2 hover:bg-blue-sapphire hover:transition"
+                class="w-full p-2 bg-viridian-green text-white my-2 hover:bg-blue-sapphire hover:transition hover:font-bold"
               >
                 Search
               </button>
@@ -55,61 +55,22 @@
           </form>
         </div>
         <!-- Recent Searches -->
-        <div class="recent-searches-container">
+        <div id="recent-searches-ctr">
           <!-- recent searches title -->
-          <h2 class="font-bold text-2xl p-2">Recent Searches</h2>
-          <!-- alert div -->
-          <div class="p-3 bg-rufous text-white">
-            You have no recent searches!
+          <div class="flex justify-between items-center">
+            <h2 class="font-bold text-2xl p-2">Recent Searches</h2>
+            <button
+              id="clear-btn"
+              class="bg-gray-200 p-2 rounded hover:bg-ruby-red hover:text-white hover:font-bold"
+            >
+              Clear
+            </button>
           </div>
+          <!-- alert div -->
+          <!-- <div class="p-3 bg-rufous text-white">
+            You have no recent searches!
+          </div> -->
           <!-- recent searches ul list -->
-          <ul class="">
-            <li
-              class="border p-3 flex justify-between cursor-pointer hover:bg-black hover:text-white hover:transition"
-            >
-              <span>London</span
-              ><span
-                class="font-bold text-md cursor-pointer hover:text-rust hover:scale-150"
-                >&times</span
-              >
-            </li>
-            <li
-              class="border p-3 flex justify-between cursor-pointer hover:bg-black hover:text-white hover:transition"
-            >
-              <span>Bristol</span
-              ><span
-                class="font-bold text-md cursor-pointer hover:text-rust hover:scale-150"
-                >&times</span
-              >
-            </li>
-            <li
-              class="border p-3 flex justify-between cursor-pointer hover:bg-black hover:text-white hover:transition"
-            >
-              <span>Manchester</span
-              ><span
-                class="font-bold text-md cursor-pointer hover:text-rust hover:scale-150"
-                >&times</span
-              >
-            </li>
-            <li
-              class="border p-3 flex justify-between cursor-pointer hover:bg-black hover:text-white hover:transition"
-            >
-              <span>Birmingham</span
-              ><span
-                class="font-bold text-md cursor-pointer hover:text-rust hover:scale-150"
-                >&times</span
-              >
-            </li>
-            <li
-              class="border p-3 flex justify-between cursor-pointer hover:bg-black hover:text-white hover:transition"
-            >
-              <span>Brighton</span
-              ><span
-                class="font-bold text-md cursor-pointer hover:text-rust hover:scale-150"
-                >&times</span
-              >
-            </li>
-          </ul>
         </div>
       </div>
       <!-- charts info -->

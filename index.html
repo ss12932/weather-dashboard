@@ -17,12 +17,12 @@
       </h1>
       <nav class="space-x-6">
         <a
-          class="font-bold tracking-wider uppercase p-2 rounded hover:bg-alloy-orange transform"
+          class="font-bold tracking-wider uppercase p-2 rounded hover:bg-alloy-orange"
           href="./index.html"
           >Home</a
         >
         <a
-          class="font-bold tracking-wider uppercase p-2 rounded hover:bg-alloy-orange tranasform"
+          class="font-bold tracking-wider uppercase p-2 rounded hover:bg-alloy-orange"
           href="./charts.html"
           >Charts</a
         >
@@ -47,7 +47,7 @@
               <button
                 type="submit"
                 id="submit-btn"
-                class="w-full p-2 bg-viridian-green text-white my-2 hover:bg-blue-sapphire hover:transition"
+                class="w-full p-2 bg-viridian-green text-white my-2 hover:bg-blue-sapphire hover:transition hover:font-bold"
               >
                 Search
               </button>
@@ -57,7 +57,15 @@
         <!-- Recent Searches -->
         <div id="recent-searches-ctr">
           <!-- recent searches title -->
-          <h2 class="font-bold text-2xl p-2">Recent Searches</h2>
+          <div class="flex justify-between items-center">
+            <h2 class="font-bold text-2xl p-2">Recent Searches</h2>
+            <button
+              id="clear-btn"
+              class="bg-gray-200 p-2 rounded hover:bg-ruby-red hover:text-white hover:font-bold"
+            >
+              Clear
+            </button>
+          </div>
           <!-- alert div -->
           <!-- <div class="p-3 bg-rufous text-white">
             You have no recent searches!
