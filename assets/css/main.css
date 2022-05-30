@@ -632,6 +632,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 
+.bg-gamboge {
+  background-color: #ee9b00ff;
+}
+
+.bg-ruby-red {
+  background-color: #9b2226ff;
+}
+
 .p-2 {
   padding: 0.5rem;
 }

@@ -43,6 +43,19 @@ const fetchData = async (url, options = {}) => {
 
 // ## End of Utility Functions ##
 
+const getUviClassName = (uvi) => {
+  if (uvi >= 0 && uvi <= 2) {
+    return "bg-viridian-green";
+  }
+
+  if (uvi > 2 && uvi <= 8) {
+    return "bg-gamboge";
+  }
+  if (uvi > 8) {
+    return "bg-ruby-red";
+  }
+};
+
 const renderCurrentData = (data) => {
   console.log(data);
   const {
@@ -109,7 +122,7 @@ const renderCurrentData = (data) => {
         UV Index
       </div>
       <div class="w-full md:w-2/3 border p-1">
-        <span class="p-1 bg-red-500">${uvi}</span>
+        <span class="p-1 text-white ${getUviClassName(uvi)}">${uvi}</span>
       </div>
     </div>
   </div>
@@ -118,15 +131,12 @@ const renderCurrentData = (data) => {
 };
 
 const renderForecastData = (data) => {
-  const {
-    cityName,
-    weatherData: { timezone_offset, daily },
-  } = data;
   let forecastDataCard = `<h2 class="text-center text-4xl font-bold border-b-2 py-4">
 5 Day Forecast
 </h2>
 <!-- 5  day weather container -->
   <div class="flex flex-wrap gap-8 p-4 justify-center">`;
+
   const forecastCallBack = (_, day) => {
     const {
       temp,
@@ -136,6 +146,7 @@ const renderForecastData = (data) => {
       wind_speed,
       weather: [{ icon }],
     } = day;
+
     forecastDataCard += `<div class="border shadow-lg w-full sm:w-auto">
     <h3 class="text-center text-2xl my-2 p-4">${moment
       .unix(dt)
@@ -179,14 +190,17 @@ const renderForecastData = (data) => {
           UV Index
         </div>
         <div class="border p-1">
-          <span class="p-1 bg-red-500">${uvi}</span>
+          <span class="p-1 text-white ${getUviClassName(uvi)}">${uvi}</span>
         </div>
       </div>
     </div>
   </div>`;
   };
 
-  const forecastCards = $.each(daily.slice(1, 6), forecastCallBack);
+  const forecastCards = $.each(
+    data.weatherData.daily.slice(1, 6),
+    forecastCallBack
+  );
   forecastDataCard += `
   </div>`;
   weatherInfoCtr.append(forecastDataCard);
