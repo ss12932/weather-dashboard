@@ -9,7 +9,7 @@
   </head>
   <body class="h-screen flex flex-col">
     <header
-      class="bg-rich-black-fogra-29 text-white py-6 flex justify-between px-6"
+      class="bg-rich-black-fogra-29 text-white py-6 flex items-center md:justify-between px-6 flex-col md:flex-row space-y-6 md:space-y-0"
     >
       <h1
         class="uppercase tracking-wider font-bold text-xl flex flex-col sm:flex-row sm:justify-center items-center space-y-2 sm:space-x-2 sm:space-y-0"
@@ -17,7 +17,7 @@
         Sinh's Weather
         <span class="bg-alloy-orange p-2 rounded">Dashboard</span>
       </h1>
-      <nav class="flex flex-col items-center sm:flex-row md:space-x-6">
+      <nav class="flex flex-col items-center sm:flex-row sm:space-x-6">
         <a
           class="font-bold tracking-wider uppercase p-2 rounded hover:bg-alloy-orange"
           href="./index.html"
@@ -76,11 +76,23 @@
         </div>
       </div>
       <!-- charts info -->
-      <div class="grid grid-cols-2 flex-1">
-        <div>Weekly Temperature</div>
-        <div>Weekly Humidity</div>
-        <div>Weekly Windspeed</div>
-        <div>Weekly UV Index</div>
+      <div class="grid grid-cols-2 flex-1 p-10 gap-10">
+        <div>
+          <h2 class="font-bold text-xl">Weekly Temperature</h2>
+          <canvas id="temp-chart"></canvas>
+        </div>
+        <div>
+          <h2 class="font-bold text-xl">Weekly Humidity</h2>
+          <canvas id="humidity-chart"></canvas>
+        </div>
+        <div>
+          <h2 class="font-bold text-xl">Weekly Windspeed</h2>
+          <canvas id="windspeed-chart"></canvas>
+        </div>
+        <div>
+          <h2 class="font-bold text-xl">Weekly UV Index</h2>
+          <canvas id="uv-chart"></canvas>
+        </div>
       </div>
     </main>
     <script
@@ -95,7 +107,9 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="./assets/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+    <script src="./assets/js/utility.js"></script>
+    <script src="./assets/js/charts.js"></script>
     <script></script>
   </body>
 </html>
