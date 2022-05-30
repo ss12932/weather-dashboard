@@ -229,7 +229,7 @@ const renderRecentSearches = () => {
     >
       <span>${city}</span
       ><span
-        class="font-bold text-md cursor-pointer hover:text-rust hover:scale-150"
+        class="remove-btn font-bold text-md cursor-pointer hover:text-rust hover:scale-150"
         >&times</span
       >
     </li>`;
@@ -334,6 +334,22 @@ const handleRecentSearchClick = (e) => {
     resetBtnClear();
     //re render recent searches
     renderRecentSearches();
+  }
+  // console.log(target.hasClass("remove-btn"));
+  // console.log(target.parent().data("city"));
+
+  //checks if span of x button clicked and has class remove-btn
+  if (target.is("span") && target.hasClass("remove-btn")) {
+    //retrive array from local storage
+    const arrFromLS = retrieveFromLS("recentSearches");
+
+    //finding index of array of item to be removed. this is done by finding the item data attribute.
+    const removeIndex = arrFromLS.indexOf(target.parent().data("city"));
+    //once we have the index, we splice the array element containing this data attribute and rewrite it back to local storage
+    arrFromLS.splice(removeIndex, 1);
+    writeToLS("recentSearches", arrFromLS);
+    //also target the parent which is the li element and remove.
+    target.parent().remove();
   }
 };
 
