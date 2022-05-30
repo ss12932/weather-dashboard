@@ -221,7 +221,7 @@ const renderRecentSearches = () => {
     recentSearchesCtr.append(alert);
   } else {
     //else render recent searches list
-    let ul = `<ul>`;
+    let ul = `<ul id="recent-search-list">`;
     const recentCities = $.each(recentSearches, (_, city) => {
       ul += `<li
       class="border p-3 flex justify-between cursor-pointer hover:bg-black hover:text-white hover:transition"
@@ -311,6 +311,11 @@ const fetchWeatherData = async (cityName) => {
   };
 };
 
+const resetBtnClear = () => {
+  localStorage.removeItem("recentSearches");
+  $("#recent-search-list").remove();
+};
+
 const handleRecentSearchClick = (e) => {
   const target = $(e.target);
   //restrict clicks only from lis
@@ -321,6 +326,14 @@ const handleRecentSearchClick = (e) => {
     console.log(cityName);
 
     renderWeatherInfo(cityName);
+  }
+
+  if (target.is("button")) {
+    // console.log("im the reset button hey");
+    //clear all content includign local storage
+    resetBtnClear();
+    //re render recent searches
+    renderRecentSearches();
   }
 };
 
