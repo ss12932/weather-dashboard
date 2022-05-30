@@ -44,18 +44,34 @@ const fetchData = async (url, options = {}) => {
 // ## End of Utility Functions ##
 
 const renderCurrentData = (data) => {
+  console.log(data);
+  const {
+    cityName,
+    weatherData: {
+      timezone_offset,
+      current: {
+        temp,
+        uvi,
+        humidity,
+        wind_speed,
+        dt,
+        weather: [{ icon }],
+      },
+    },
+  } = data;
+  console.log(icon);
   const currentDayCard = `<div>
   <div class="flex justify-center space-x-6 my-4 flex-col md:flex-row">
     <div>
-      <h2 class="text-center text-4xl font-bold my-2">Birmingham</h2>
+      <h2 class="text-center text-4xl font-bold my-2">${cityName}</h2>
       <h3 class="text-center text-2xl semibold my-2">
-        Friday 27th May 2022 12:56:22
+      ${moment.unix(dt + timezone_offset).format("dddd, Do MMM, YYYY HH:mm:ss")}
       </h3>
     </div>
     <div>
       <img
-        class="mx-auto"
-        src="https://via.placeholder.com/100"
+        class="mx-auto w-24 h-24"
+        src="http://openweathermap.org/img/w/${icon}.png"
         alt=""
       />
     </div>
@@ -68,7 +84,7 @@ const renderCurrentData = (data) => {
       >
         Temperature
       </div>
-      <div class="w-full md:w-2/3 border p-1">17.15C</div>
+      <div class="w-full md:w-2/3 border p-1">${temp}C</div>
     </div>
     <div class="flex flex-col md:flex-row">
       <div
@@ -76,7 +92,7 @@ const renderCurrentData = (data) => {
       >
         Humidity
       </div>
-      <div class="w-full md:w-2/3 border p-1">17.15C</div>
+      <div class="w-full md:w-2/3 border p-1">${humidity}</div>
     </div>
     <div class="flex flex-col md:flex-row">
       <div
@@ -84,7 +100,7 @@ const renderCurrentData = (data) => {
       >
         Windspeed
       </div>
-      <div class="w-full md:w-2/3 border p-1">17.15C</div>
+      <div class="w-full md:w-2/3 border p-1">${wind_speed}</div>
     </div>
     <div class="flex flex-col md:flex-row">
       <div
@@ -93,7 +109,7 @@ const renderCurrentData = (data) => {
         UV Index
       </div>
       <div class="w-full md:w-2/3 border p-1">
-        <span class="p-1 bg-red-500">17.15C</span>
+        <span class="p-1 bg-red-500">${uvi}</span>
       </div>
     </div>
   </div>
@@ -101,259 +117,77 @@ const renderCurrentData = (data) => {
   weatherInfoCtr.append(currentDayCard);
 };
 
-const renderForecastData = () => {
-  const forecastDataCard = `<h2 class="text-center text-4xl font-bold border-b-2 py-4">
-    5 Day Forecast
-  </h2>
-  <!-- 5  day weather container -->
-  <div class="flex flex-wrap gap-8 p-4 justify-center">
-    <!-- card 1 -->
-    <div class="border shadow-lg w-full sm:w-auto">
-      <h3 class="text-center text-2xl my-2 p-4">Friday 27th May</h3>
-      <div class="mx-auto">
-        <img
-          class="mx-auto my-2"
-          src="https://via.placeholder.com/100"
-          alt=""
-        />
+const renderForecastData = (data) => {
+  const {
+    cityName,
+    weatherData: { timezone_offset, daily },
+  } = data;
+  let forecastDataCard = `<h2 class="text-center text-4xl font-bold border-b-2 py-4">
+5 Day Forecast
+</h2>
+<!-- 5  day weather container -->
+  <div class="flex flex-wrap gap-8 p-4 justify-center">`;
+  const forecastCallBack = (_, day) => {
+    const {
+      temp,
+      dt,
+      uvi,
+      humidity,
+      wind_speed,
+      weather: [{ icon }],
+    } = day;
+    forecastDataCard += `<div class="border shadow-lg w-full sm:w-auto">
+    <h3 class="text-center text-2xl my-2 p-4">${moment
+      .unix(dt)
+      .format("ddd, Do MMM")}</h3>
+    <div class="mx-auto">
+      <img
+        class="mx-auto my-2"
+        src="http://openweathermap.org/img/w/${icon}.png"
+        alt=""
+      />
+    </div>
+    <div class="mx-auto grid grid-cols-1 p-4">
+      <div class="">
+        <div
+          class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
+        >
+          Temperature
+        </div>
+        <div class="border p-1">${temp.day}C</div>
       </div>
-      <div class="mx-auto grid grid-cols-1 p-4">
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            Temperature
-          </div>
-          <div class="border p-1">17.15C</div>
+      <div class="">
+        <div
+          class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
+        >
+          Humidity
         </div>
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            Humidity
-          </div>
-          <div class="border p-1">17.15C</div>
+        <div class="border p-1">${humidity}</div>
+      </div>
+      <div class="">
+        <div
+          class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
+        >
+          Windspeed
         </div>
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            Windspeed
-          </div>
-          <div class="border p-1">17.15C</div>
+        <div class="border p-1">${wind_speed}MPH</div>
+      </div>
+      <div class="">
+        <div
+          class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
+        >
+          UV Index
         </div>
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            UV Index
-          </div>
-          <div class="border p-1">
-            <span class="p-1 bg-red-500">17.15C</span>
-          </div>
+        <div class="border p-1">
+          <span class="p-1 bg-red-500">${uvi}</span>
         </div>
       </div>
     </div>
-    <!-- card 2 -->
-    <div class="border shadow-lg w-full sm:w-auto">
-      <h3 class="text-center text-2xl semibold my-2 p-4">
-        Friday 27th May
-      </h3>
-      <div class="mx-auto">
-        <img
-          class="mx-auto my-2"
-          src="https://via.placeholder.com/100"
-          alt=""
-        />
-      </div>
+  </div>`;
+  };
 
-      <div class="mx-auto grid grid-cols-1 p-4">
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            Temperature
-          </div>
-          <div class="border p-1">17.15C</div>
-        </div>
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            Humidity
-          </div>
-          <div class="border p-1">17.15C</div>
-        </div>
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            Windspeed
-          </div>
-          <div class="border p-1">17.15C</div>
-        </div>
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            UV Index
-          </div>
-          <div class="border p-1">
-            <span class="p-1 bg-red-500">17.15C</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- card 3 -->
-    <div class="border shadow-lg w-full sm:w-auto">
-      <h3 class="text-center text-2xl semibold my-2 p-4">
-        Friday 27th May
-      </h3>
-      <div class="mx-auto">
-        <img
-          class="mx-auto my-2"
-          src="https://via.placeholder.com/100"
-          alt=""
-        />
-      </div>
-
-      <div class="mx-auto grid grid-cols-1 p-4">
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            Temperature
-          </div>
-          <div class="border p-1">17.15C</div>
-        </div>
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            Humidity
-          </div>
-          <div class="border p-1">17.15C</div>
-        </div>
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            Windspeed
-          </div>
-          <div class="border p-1">17.15C</div>
-        </div>
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            UV Index
-          </div>
-          <div class="border p-1">
-            <span class="p-1 bg-red-500">17.15C</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- card 4 -->
-    <div class="border shadow-lg w-full sm:w-auto">
-      <h3 class="text-center text-2xl semibold my-2 p-4">
-        Friday 27th May
-      </h3>
-      <div class="mx-auto">
-        <img
-          class="mx-auto my-2"
-          src="https://via.placeholder.com/100"
-          alt=""
-        />
-      </div>
-
-      <div class="mx-auto grid grid-cols-1 p-4">
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            Temperature
-          </div>
-          <div class="border p-1">17.15C</div>
-        </div>
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            Humidity
-          </div>
-          <div class="border p-1">17.15C</div>
-        </div>
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            Windspeed
-          </div>
-          <div class="border p-1">17.15C</div>
-        </div>
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            UV Index
-          </div>
-          <div class="border p-1">
-            <span class="p-1 bg-red-500">17.15C</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- card 5 -->
-    <div class="border shadow-lg w-full sm:w-auto">
-      <h3 class="text-center text-2xl semibold my-2 p-4">
-        Friday 27th May
-      </h3>
-      <div class="mx-auto">
-        <img
-          class="mx-auto my-2"
-          src="https://via.placeholder.com/100"
-          alt=""
-        />
-      </div>
-
-      <div class="mx-auto grid grid-cols-1 p-4">
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            Temperature
-          </div>
-          <div class="border p-1">17.15C</div>
-        </div>
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            Humidity
-          </div>
-          <div class="border p-1">17.15C</div>
-        </div>
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            Windspeed
-          </div>
-          <div class="border p-1">17.15C</div>
-        </div>
-        <div class="">
-          <div
-            class="border p-1 bg-rich-black-fogra-29 text-white font-semibold"
-          >
-            UV Index
-          </div>
-          <div class="border p-1">
-            <span class="p-1 bg-red-500">17.15C</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  const forecastCards = $.each(daily.slice(1, 6), forecastCallBack);
+  forecastDataCard += `
   </div>`;
   weatherInfoCtr.append(forecastDataCard);
 };
@@ -458,11 +292,11 @@ const handleFormSubmit = async (e) => {
   if (cityName) {
     // console.log(cityName);
     //fetch weather data
-    const { current, daily } = await fetchWeatherData(cityName);
+    const weatherData = await fetchWeatherData(cityName);
     //render current data
-    renderCurrentData(current);
+    renderCurrentData(weatherData);
     //render forecast 5 day data
-    renderForecastData(daily);
+    renderForecastData(weatherData);
     //get recentSearches from local storage
     const recentSearches = retrieveFromLS("recentSearches", []);
 

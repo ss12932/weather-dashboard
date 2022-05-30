@@ -533,8 +533,24 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 100vh;
 }
 
+.h-6 {
+  height: 1.5rem;
+}
+
+.h-24 {
+  height: 6rem;
+}
+
 .w-full {
   width: 100%;
+}
+
+.w-6 {
+  width: 1.5rem;
+}
+
+.w-24 {
+  width: 6rem;
 }
 
 .flex-1 {
