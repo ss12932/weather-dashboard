@@ -212,10 +212,10 @@ const renderRecentSearches = () => {
   // get From Local Storage
   const recentSearches = retrieveFromLS("recentSearches", []);
   // const recentSearches = ["London", "Bristol", "Leeds"];
-
+  const alertExists = $(".search-alert").length;
   // if empty show alert
-  if (!recentSearches.length) {
-    const alert = `<div class="p-3 bg-rufous text-white">
+  if (!recentSearches.length && alertExists === 0) {
+    const alert = `<div class="search-alert p-3 bg-rufous text-white">
   You have no recent searches!
 </div>`;
     recentSearchesCtr.append(alert);
@@ -312,8 +312,9 @@ const fetchWeatherData = async (cityName) => {
 };
 
 const resetBtnClear = () => {
+  const searchList = $("#recent-search-list");
   localStorage.removeItem("recentSearches");
-  $("#recent-search-list").remove();
+  searchList.remove();
 };
 
 const handleRecentSearchClick = (e) => {
@@ -330,7 +331,7 @@ const handleRecentSearchClick = (e) => {
 
   if (target.is("button")) {
     // console.log("im the reset button hey");
-    //clear all content includign local storage
+    //clear all content including local storage
     resetBtnClear();
     //re render recent searches
     renderRecentSearches();
