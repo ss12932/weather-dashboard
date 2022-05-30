@@ -10,7 +10,12 @@ https://ss12932.github.io/weather-dashboard/
 
 ## Github Repository Link
 
+https://github.com/ss12932/weather-dashboard
+
 ## Application Screenshot
+
+![weather-dashboard-desktop](./assets/img/desktop-view.png)
+![weather-dashboard-mobile](./assets/img/mobile-view.png)
 
 ## User Story
 
